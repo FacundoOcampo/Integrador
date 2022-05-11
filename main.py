@@ -1,16 +1,22 @@
-# This is a sample Python script.
-
-# Press Mayús+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import csv
+from ManejadorCama import ManCama
+from ManejadorMedicamento import ManMed
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    #Carga el archivo "camas" y crea las instancias
+    ArchivoC=open("camas.csv","r")
+    ReaderC=csv.reader(ArchivoC,delimiter=";")
+    NuevoManCama=ManCama()
+    NuevoManCama.Cargar(ReaderC)
+    #Carga el archivo "medicamentos" y crea las instancias
+    ArchivoM=open("medicamentos.csv","r")
+    ReaderM=csv.reader(ArchivoM,delimiter=";")
+    NuevoManMed=ManMed()
+    NuevoManMed.Cargar(ReaderM)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    NomPac=str(input("Ingrese el nombre de un paciente:\n"))
+    NuevoManCama.Buscar(NomPac,NuevoManMed)
+
+    Diag=str(input("Ingrese el diagnostico\n"))
+    NuevoManCama.Listar(Diag)
